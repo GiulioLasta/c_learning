@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     for (size_t i = 0; i < 2; i++)
     {
         if(array[i].operator == operator) {
-            printf("%d\n", array[i].fpop(1,2)); 
+            printf("My result is: %d\n", array[i].fpop(1,2)); 
         }
     }
     return 1;

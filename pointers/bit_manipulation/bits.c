@@ -119,19 +119,42 @@ uint32_t bf_read (uint32_t reg, uint8_t start, uint8_t len)
 
 uint32_t bf_write(uint32_t reg, uint8_t start, uint8_t len, uint32_t val)
 {
-    // 01001100 reg - 5 3 101
-    uint32_t mask = ((1u << len) - 1) << start;
-    // 00000111 // 11000000
+    // // 01001100 reg - 5 3 101
+    uint32_t mask = ((1u << len) - 1) << start;  // campo da azzerare
+    // 00000111 shiftato 11100000
     reg = reg & ~mask;
-    // 01001100 AND NOT 11000000
-    // 01001100 AND 00111111
-    // 00011100
+    // NOT 00011111
+    // AND 
+    // 01001100
+    // 00011111
+    // RES 00001100
+
+    uint32_t aaa = (val << (start));
+    // 10100000
 
 
-    uint32_t aaa = (val << (start-len)); // se val 101 --> 00101000
+    return reg | aaa;
+    // 00001100
+    // 10100000
+    // 10101100
+
+    // RESULTATO VOLUTO
+    // 01010100
+
+    // // 01001100 reg - 5 3 101
+    // uint32_t mask = ((1u << len) - 1) << start;
+    // // 00000111 // 11000000
+    // // uint32_t bbb = reg & ~mask;
+    // // 01001100 AND NOT 11000000
+    // // 01001100 AND 00111111
+    // // 00011100
 
 
-    return aaa | bbb;
+    // uint32_t aaa = (val << (start-len)); // se val 101 --> 00101000
+
+    // uint32_t bbb = 
+
+    // return aaa | bbb;
     // uint32_t mask = (1u << start) - 1;        // 000111111
     // uint32_t mask2 = (1u << (start-len)) - 1; // 000001111
     // uint32_t maskXOR = mask ^ mask2;          // 000110000

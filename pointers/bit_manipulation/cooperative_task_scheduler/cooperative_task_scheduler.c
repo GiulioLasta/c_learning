@@ -1,5 +1,6 @@
 #include "cooperative_task_scheduler.h"
 #include <time.h>
+#include <stdio.h>
 
 uint64_t now_ms(void) {
     struct timespec ts;
@@ -32,7 +33,12 @@ void scheduler_run(Scheduler_t *s)   /* chiama una volta nel loop */
     {
         if(now_ms() - s->tasks[i].last_run_ms >= s->tasks[i].period_ms && s->tasks[i].enabled == 1)
         {
+            printf("Before running task: %ld\n", now_ms());
+
             s->tasks[i].fn();
+
+            printf("After running task: %ld\n", now_ms());
+
             s->tasks[i].last_run_ms = now_ms();
         }
     }
